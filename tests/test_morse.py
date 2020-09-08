@@ -60,7 +60,8 @@ class TestDecodeMorse(unittest.TestCase):
         """Check long message decoding"""
         morse = '      ...---... -.-.--   - .... .   --.- ..- .. -.-. -.-   -... .-. --- .-- -.   ..-. --- -..-   .--- ..- -- .--. ...   --- ...- . .-.   - .... .  '            ' .-.. .- --.. -.--   -.. --- --. .-.-.-  '
         actual = self.module.decode_morse(morse)
-        self.assertEqual(actual, 'SOS! THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.')
+        self.assertEqual(
+            actual, 'SOS! THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.')
 
     def test_flake8(self):
         """Checking for PEP8/flake8 compliance"""
@@ -71,14 +72,14 @@ class TestDecodeMorse(unittest.TestCase):
         """Checking for __author__ string"""
         self.assertNotEqual(self.module.__author__, '???')
 
-    
+
 class TestDecodeBits(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Performs module import and suite setup at test-runtime"""
         cls.assertGreaterEqual(cls, sys.version_info[0], 3)
         cls.module = importlib.import_module(PKG_NAME)
-        
+
     def test_et_phone_home(self):
         """Check if ET PHONE HOME can be transcoded to Morse"""
         bits = '11000000111111000000000000001100111111001111110011000000110011001100110000001111110011111100111111000000111111001100000011000000000000001100110011001100000011111100111111001111110000001111110011111100000011'
@@ -111,9 +112,11 @@ class TestDecodeBits(unittest.TestCase):
         self.assertEqual(self.module.decode_bits('110011'), '..')  # I
         self.assertEqual(self.module.decode_bits('111000111'), '..')  # I
         self.assertEqual(self.module.decode_bits('111110000011111'), '..')  # I
-        self.assertEqual(self.module.decode_bits('111000000000111'), '. .')  # EE
+        self.assertEqual(self.module.decode_bits(
+            '111000000000111'), '. .')  # EE
         self.assertEqual(self.module.decode_bits('11111100111111'), '--')  # M
-        self.assertEqual(self.module.decode_bits('111000111000111'), '...')  # S
+        self.assertEqual(self.module.decode_bits(
+            '111000111000111'), '...')  # S
 
     def test_extra_zeroes(self):
         """Check handling of leading and trailing zeros"""
